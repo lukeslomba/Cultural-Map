@@ -115,7 +115,7 @@ def add_categorical_legend(folium_map, title, colors, labels):
 url = 'https://docs.google.com/spreadsheets/d/1EyIJRnLrWkeAJuxLVBxO2eSBMfKiQ2aHYLS3PLvQLLs/export?format=csv'
 r = requests.get(url, allow_redirects=True)
 
-open('responses.csv', 'wb').write(r.content)
+open('responses.csv', 'w').write(r.content)
 '''
 
 # IMPORT DATASET FROM LOCAL CSV FILE
@@ -204,12 +204,13 @@ colors_dict = {'Organization':              'aqua',
                 'Business':                 'blue',
                 'Performance Venue':        'lime',
                 'Gallery/Museum':           'pink', 
-                'School/Education':         'gold',
+                'School/Education':         'brown',
                 'Landmark/Public Space':    'green',
                 'Event/Festival':           'red',
                 'Artist(s) Studio/Workshop':'orange',
                 'House of Worship':         'purple',
-                'Library':                  'brown'}
+                'Library':                  'magenta',
+                'Other':                    'grey'}
 
 for i in range(len(df)):
     if df.loc[i, 'Type'] in colors_dict.keys():
@@ -245,7 +246,7 @@ for index, row in df.iterrows():
 base_map = add_categorical_legend(base_map, 'Asset type',
                              colors = list(colors_dict.values()),
                            labels = list(colors_dict.keys()))
-'''
+
 # SAVE MAP TO HTML FILE
         
 html = base_map._repr_html_()
@@ -253,6 +254,3 @@ html = base_map._repr_html_()
 file = open("index.html","w")
 file.write(html)
 file.close()
-'''
-
-base_map
